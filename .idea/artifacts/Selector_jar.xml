@@ -1,0 +1,11 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="Selector:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/Selector_jar</output-path>
+    <root id="archive" name="Selector.jar">
+      <element id="module-output" name="Selector" />
+      <element id="extracted-dir" path="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.scala-lang/scala-library/2.11.1/e11da23da3eabab9f4777b9220e60d44c1aab6a/scala-library-2.11.1.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.scala-lang/scala-swing/2.10.3/368ad9340c64cfabe56766ae4986b9126d98baf/scala-swing-2.10.3.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.slf4j/slf4j-api/1.7.5/6b262da268f8ad9eff941b25503a9198f0a0ac93/slf4j-api-1.7.5.jar" path-in-jar="/" />
+    </root>
+  </artifact>
+</component>

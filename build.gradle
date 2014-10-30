@@ -1,0 +1,56 @@
+apply plugin: 'java'
+apply plugin: 'scala'
+apply plugin: 'idea'
+apply plugin: 'gradle-one-jar'
+
+group = 'uk.co.abp24'
+version = '1.0.0'
+
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath 'com.github.rholder:gradle-one-jar:1.0.4'
+    }
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compile 'org.slf4j:slf4j-api:1.7.5'
+    compile "org.scala-lang:scala-library:2.11.1"
+    compile 'org.scala-lang:scala-swing:2.10.3'
+    compile fileTree(dir: 'lib', include: 'LeapJava.jar')
+}
+
+task run(type: JavaExec, dependsOn: classes) {
+    main = 'uk.co.abp24.Launch'
+    classpath sourceSets.main.runtimeClasspath
+    classpath configurations.runtime
+    classpath 'lib/LeapJava.jar'
+    //jvmArgs = [ "-Djava.library.path=lib"]
+    systemProperty "java.library.path", 'lib'
+}
+
+task copy(type: Copy) {
+    from 'lib'
+    into 'build/libs'
+    include '**/*.dll'
+}
+
+jar {
+    archiveName = 'selector.jar'
+    manifest {
+        attributes "Main-Class": 'uk.co.abp24.Launch',
+                "Class-Path": 'lib/LeapJava.jar',
+                "Implementation-Title": "Selector"
+    }
+}
+
+task buildJar(type: OneJar, dependsOn: copy) {
+    mainClass = 'uk.co.abp24.Launch'
+    mergeManifestFromJar = true
+}
