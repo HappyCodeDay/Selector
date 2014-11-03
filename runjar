@@ -1,0 +1,3 @@
+#!/bin/bash
+gradle buildJar
+java  -Djava.library.path=lib -XshowSettings:properties -jar build/libs/Selector-1.0.0-standalone.jar

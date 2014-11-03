@@ -1,26 +1,29 @@
 package uk.co.abp24
 
 import com.leapmotion.leap._
-
+import java.io._
 import scala.collection.JavaConversions._
+import util.control.Breaks._
+
 
 object Launch {
-  val version = "0.1a";
-
   def main(args: Array[String]) {
-    println("Input Selector V" + version)
+    println("Current Directory: " + new java.io.File(".").getCanonicalPath)
 
-    val listener: SampleListener = new SampleListener
+    val listener = new SampleListener
     val controller = new Controller
 
-    // Have the sample listener receive events from the controller
     controller.addListener(listener)
 
-    while (true) Thread sleep (10000)
+    breakable {
+      for (ln <- io.Source.stdin.getLines)
+        if (ln.toLowerCase.contains("quit")) break
+    }
 
     controller.removeListener(listener)
   }
 }
+
 
 class SampleListener extends Listener {
   override def onInit(controller: Controller) {

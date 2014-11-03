@@ -1,6 +1,7 @@
 apply plugin: 'java'
 apply plugin: 'scala'
 apply plugin: 'idea'
+apply plugin: 'application'
 apply plugin: 'gradle-one-jar'
 
 group = 'uk.co.abp24'
@@ -26,13 +27,14 @@ dependencies {
     compile fileTree(dir: 'lib', include: 'LeapJava.jar')
 }
 
-task run(type: JavaExec, dependsOn: classes) {
+run {
     main = 'uk.co.abp24.Launch'
-    classpath sourceSets.main.runtimeClasspath
-    classpath configurations.runtime
-    classpath 'lib/LeapJava.jar'
-    //jvmArgs = [ "-Djava.library.path=lib"]
-    systemProperty "java.library.path", 'lib'
+    standardInput = System.in
+    jvmArgs = [ "-Djava.library.path=lib"]
+}
+
+startScripts {
+    classpath += files('lib/*')
 }
 
 task copy(type: Copy) {
