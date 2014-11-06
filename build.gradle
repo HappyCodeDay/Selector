@@ -30,7 +30,13 @@ dependencies {
 run {
     main = 'uk.co.abp24.Launch'
     standardInput = System.in
-    jvmArgs = [ "-Djava.library.path=lib"]
+    if (System.properties['os.arch'].contains("86")) {
+	println "Detected x86 architecture."
+	jvmArgs = ["-Djava.library.path=lib/x86"]
+    } else {
+	println "Detected x64 architecture."
+	jvmArgs = ["-Djava.library.path=lib/x64"]
+    }
 }
 
 startScripts {
